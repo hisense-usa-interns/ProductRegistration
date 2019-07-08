@@ -54,7 +54,7 @@ public class DataGetter {
      */
     public String retrieveModel() {
         String model = android.os.Build.MODEL;
-        model.toUpperCase();
+        model = model.toUpperCase();
         Log.d(TAG, "model got: " + model);
         return model;
     }
