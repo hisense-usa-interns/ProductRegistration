@@ -48,6 +48,17 @@ public class DataGetter {
         return serial;
     }
 
+    /**
+     * retrieve the model
+     * @return model of the device
+     */
+    public String retrieveModel() {
+        String model = android.os.Build.MODEL;
+        model.toUpperCase();
+        Log.d(TAG, "model got: " + model);
+        return model;
+    }
+
 
 
 }
