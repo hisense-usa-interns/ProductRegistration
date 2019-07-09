@@ -12,6 +12,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
 import android.util.Log;
+import android.webkit.ValueCallback;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -49,7 +50,17 @@ public class MainActivity extends Activity {
 
         webview.setWebViewClient(new WebViewClient() {
             public void onPageFinished(WebView view, String url) {
-                view.loadUrl(js);
+
+                if (android.os.Build.VERSION.SDK_INT >= 19) {
+                    view.evaluateJavascript(js, new ValueCallback<String>() {
+                        @Override
+                        public void onReceiveValue(String s) {
+
+                        }
+                    });
+                } else {
+                    view.loadUrl(js);
+                }
             }
         });
 
