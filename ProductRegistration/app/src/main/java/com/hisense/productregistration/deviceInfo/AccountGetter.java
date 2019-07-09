@@ -1,8 +1,14 @@
 package com.hisense.productregistration.deviceInfo;
 
+import android.Manifest;
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
 
 import static android.content.Context.ACCOUNT_SERVICE;
 
@@ -25,11 +31,27 @@ public class AccountGetter {
     }
 
     /**
+     * return account manager
+     * @return manager
+     */
+    public AccountManager getManager() {
+        return this.manager;
+    }
+
+    /**
      * get the account object from Google, only the first account in the account list
      * @return account
      */
     public Account retrieveAccount() {
-        Account[] accounts = manager.getAccountsByType("com.google");
+
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.GET_ACCOUNTS) != PackageManager.PERMISSION_GRANTED) {
+            Log.d(TAG, "permission denied");
+            ActivityCompat.requestPermissions((Activity) context, new String[] {Manifest.permission.GET_ACCOUNTS} ,1);
+            Log.d(TAG, "permission requested");
+        }
+        Log.d(TAG, "permission granted already");
+
+        Account[] accounts = manager.getAccounts();
         Account account;
         if (accounts.length > 0) {
             account = accounts[0];

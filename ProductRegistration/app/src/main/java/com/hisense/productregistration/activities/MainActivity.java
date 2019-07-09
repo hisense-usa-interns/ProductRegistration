@@ -2,8 +2,11 @@ package com.hisense.productregistration.activities;
 
 import android.Manifest;
 import android.accounts.Account;
+import android.accounts.AccountAuthenticatorActivity;
+import android.accounts.AccountManager;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -46,14 +49,18 @@ public class MainActivity extends Activity {
         DataGetter dataGetter = new DataGetter(context);
         String serial = dataGetter.retrieveSerialNumber();
         String model = dataGetter.retrieveModel();
-        String postalCode = retrievePostalCode();
+        //String postalCode = retrievePostalCode();
         String productType = "televisions";
 
         AccountGetter accountGetter = new AccountGetter(context);
+        AccountManager manager = accountGetter.getManager();
+        Intent intent = manager.newChooseAccountIntent(null, null, new String[] {"com.google"}, null, null, null, null);
+        startActivityForResult(intent, 23);
+
         Account account = accountGetter.retrieveAccount();
         String email = accountGetter.retrieveEmail(account);
 
-        final String js = "javascript:document.getElementById('Form_RegisterProductForm_ModelNumber').value = '" + model + "';document.getElementById('Form_RegisterProductForm_SerialNumber').value='" + serial + "';document.getElementById('Form_RegisterProductForm_PostalCode').value='" + postalCode + "';document.getElementById('Form_RegisterProductForm_ProductCategory').value='" + productType + "';document.getElementById('Form_RegisterProductForm_Email').value='" + email + "';";
+        final String js = "javascript:document.getElementById('Form_RegisterProductForm_ModelNumber').value = '" + model + "';document.getElementById('Form_RegisterProductForm_SerialNumber').value='" + serial + "';document.getElementById('Form_RegisterProductForm_ProductCategory').value='" + productType + "';document.getElementById('Form_RegisterProductForm_Email').value='" + email + "';";
 
         webview.setWebViewClient(new WebViewClient() {
             public void onPageFinished(WebView view, String url) {

@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -52,7 +53,7 @@ public class DataGetter {
      * @return model of the device
      */
     public String retrieveModel() {
-        String model = android.os.Build.MODEL;
+        String model = Build.MODEL;
         model = model.toUpperCase();
         Log.d(TAG, "model got: " + model);
         return model;
