@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.hisense.productregistration.R;
 import com.hisense.productregistration.deviceInfo.DataGetter;
@@ -44,6 +45,13 @@ public class MainActivity extends Activity {
         String model = dataGetter.retrieveModel();
         String postalCode = retrievePostalCode();
 
+        final String js = "javascript:document.getElementById('ModelNumber').value = '" + model + "';document.getElementById('SerialNumber').value='" + serial + "';document.getElementById('PostalCode').value='" + postalCode + "';";
+
+        webview.setWebViewClient(new WebViewClient() {
+            public void onPageFinished(WebView view, String url) {
+                view.loadUrl(js);
+            }
+        });
 
     }
 
