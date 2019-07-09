@@ -10,7 +10,6 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.webkit.WebSettings;
@@ -35,7 +34,7 @@ public class MainActivity extends Activity {
 
         WebView webview = new WebView(this);
         setContentView(webview);
-        webview.loadUrl("https://www.google.com/");
+        webview.loadUrl("https://www.hisense-usa.com/support/register");
 
         WebSettings settings = webview.getSettings();
         settings.setJavaScriptEnabled(true);
@@ -44,6 +43,8 @@ public class MainActivity extends Activity {
         String serial = dataGetter.retrieveSerialNumber();
         String model = dataGetter.retrieveModel();
         String postalCode = retrievePostalCode();
+
+
     }
 
     /**
