@@ -1,6 +1,7 @@
 package com.hisense.productregistration.activities;
 
 import android.Manifest;
+import android.accounts.Account;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -18,6 +19,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.hisense.productregistration.R;
+import com.hisense.productregistration.deviceInfo.AccountGetter;
 import com.hisense.productregistration.deviceInfo.DataGetter;
 
 import java.io.IOException;
@@ -47,7 +49,11 @@ public class MainActivity extends Activity {
         String postalCode = retrievePostalCode();
         String productType = "televisions";
 
-        final String js = "javascript:document.getElementById('Form_RegisterProductForm_ModelNumber').value = '" + model + "';document.getElementById('Form_RegisterProductForm_SerialNumber').value='" + serial + "';document.getElementById('Form_RegisterProductForm_PostalCode').value='" + postalCode + "';document.getElementById('Form_RegisterProductForm_ProductCategory').value='" + productType + "';";
+        AccountGetter accountGetter = new AccountGetter(context);
+        Account account = accountGetter.retrieveAccount();
+        String email = accountGetter.retrieveEmail(account);
+
+        final String js = "javascript:document.getElementById('Form_RegisterProductForm_ModelNumber').value = '" + model + "';document.getElementById('Form_RegisterProductForm_SerialNumber').value='" + serial + "';document.getElementById('Form_RegisterProductForm_PostalCode').value='" + postalCode + "';document.getElementById('Form_RegisterProductForm_ProductCategory').value='" + productType + "';document.getElementById('Form_RegisterProductForm_Email').value='" + email + "';";
 
         webview.setWebViewClient(new WebViewClient() {
             public void onPageFinished(WebView view, String url) {

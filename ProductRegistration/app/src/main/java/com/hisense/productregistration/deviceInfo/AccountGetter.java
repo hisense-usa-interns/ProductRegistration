@@ -37,6 +37,16 @@ public class AccountGetter {
         return account;
     }
 
+    /**
+     * get the email address with the given account
+     * @param account
+     * @return email
+     */
+    public String retrieveEmail(Account account) {
+        String email = account.name;
+        return email;
+    }
+
 
 
 }
