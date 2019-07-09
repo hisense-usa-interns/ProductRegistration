@@ -4,6 +4,8 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.content.Context;
 
+import static android.content.Context.ACCOUNT_SERVICE;
+
 /**
  * class for getting information from Google account
  */
@@ -19,7 +21,7 @@ public class AccountGetter {
      */
     public AccountGetter(Context context) {
         this.context = context;
-        this.manager = AccountManager.get(context);
+        this.manager = (AccountManager) context.getSystemService(ACCOUNT_SERVICE);
     }
 
     /**
