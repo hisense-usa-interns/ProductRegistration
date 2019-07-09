@@ -45,8 +45,9 @@ public class MainActivity extends Activity {
         String serial = dataGetter.retrieveSerialNumber();
         String model = dataGetter.retrieveModel();
         String postalCode = retrievePostalCode();
+        String productType = "Television";
 
-        final String js = "javascript:document.getElementById('ModelNumber').value = '" + model + "';document.getElementById('SerialNumber').value='" + serial + "';document.getElementById('PostalCode').value='" + postalCode + "';";
+        final String js = "javascript:document.getElementById('Form_RegisterProductForm_ModelNumber').value = '" + model + "';document.getElementById('Form_RegisterProductForm_SerialNumber').value='" + serial + "';document.getElementById('Form_RegisterProductForm_PostalCode').value='" + postalCode + "';";
 
         webview.setWebViewClient(new WebViewClient() {
             public void onPageFinished(WebView view, String url) {
