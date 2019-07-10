@@ -9,6 +9,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
+import java.lang.reflect.Method;
+
 /**
  * class for getting data needed for device registration
  */
@@ -30,6 +32,8 @@ public class DataGetter {
      * @return serial number
      */
     public String retrieveSerialNumber() {
+
+        /**
         String serial = "";
 
         if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
@@ -46,6 +50,26 @@ public class DataGetter {
 
         Log.d(TAG, "serial number got: " + serial);
         return serial;
+
+         */
+
+        String model;
+
+        try {
+            Class<?> c = Class.forName("android.os.SystemProperties");
+            Method get = c.getMethod("get", String.class);
+
+            // (?) Lenovo Tab (https://stackoverflow.com/a/34819027/1276306)
+            model = (String) get.invoke(c, "ro.product.hisense.model");
+
+            if (model.equals(""))
+                model = null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            model = null;
+        }
+
+        return model;
     }
 
     /**
@@ -53,9 +77,23 @@ public class DataGetter {
      * @return model of the device
      */
     public String retrieveModel() {
-        String model = Build.MODEL;
-        model = model.toUpperCase();
-        Log.d(TAG, "model got: " + model);
+
+        String model;
+
+        try {
+            Class<?> c = Class.forName("android.os.SystemProperties");
+            Method get = c.getMethod("get", String.class);
+
+            // (?) Lenovo Tab (https://stackoverflow.com/a/34819027/1276306)
+            model = (String) get.invoke(c, "ro.product.hisense.model");
+
+            if (model.equals(""))
+                model = null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            model = null;
+        }
+
         return model;
     }
 
