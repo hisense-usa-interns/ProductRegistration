@@ -40,7 +40,8 @@ public class DataGetter {
 
         HisenseTvAPI mHisenseTvAPI = HisenseTvAPI.getInstance(context);
         if (mHisenseTvAPI != null) {
-            serial = mHisenseTvAPI.getConfigValue(MtkTvConfigType.CFG_FACTORY_FAC_SERIAL_NEW_NUMBER);
+            int serialInt = mHisenseTvAPI.getConfigValue(MtkTvConfigType.CFG_FACTORY_FAC_SERIAL_NEW_NUMBER);
+            serial = String.valueOf(serialInt);
             Log.d(TAG, "serial number got: " + serial);
         } else {
             Log.d(TAG, "HisenseTvAPI is null, cannot get serial number");
