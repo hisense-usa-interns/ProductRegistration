@@ -10,6 +10,7 @@ import com.mediatek.twoworlds.tv.HisenseTvAPIBase;
 import com.mediatek.twoworlds.tv.MtkTvConfig;
 import com.mediatek.twoworlds.tv.common.MtkTvConfigTypeBase;
 import com.mediatek.twoworlds.tv.common.MtkTvConfigType;
+import java.io.IOException;
 
 
 import java.lang.reflect.Method;
@@ -40,9 +41,13 @@ public class DataGetter {
 
         HisenseTvAPI mHisenseTvAPI = HisenseTvAPI.getInstance(context);
         if (mHisenseTvAPI != null) {
-            int serialInt = mHisenseTvAPI.getConfigValue(MtkTvConfigType.CFG_FACTORY_FAC_SERIAL_NEW_NUMBER);
-            serial = String.valueOf(serialInt);
-            Log.d(TAG, "serial number got: " + serial);
+            try {
+                serial = mHisenseTvAPI.getSerialNewNumber(MtkTvConfigType.CFG_FACTORY_FAC_SERIAL_NEW_NUMBER);
+                Log.d(TAG, "serial number got: " + serial);
+            } catch (Exception e) {
+                serial = "Serial number";
+                Log.e(TAG, "cannot get serial number");
+            }
         } else {
             Log.d(TAG, "HisenseTvAPI is null, cannot get serial number");
         }
