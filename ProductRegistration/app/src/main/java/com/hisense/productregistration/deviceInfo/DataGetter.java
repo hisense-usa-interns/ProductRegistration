@@ -3,11 +3,15 @@ package com.hisense.productregistration.deviceInfo;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
-import android.content.pm.PackageManager;
-import android.os.Build;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
+
+import com.mediatek.twoworlds.tv.HisenseTvAPI;
+import com.mediatek.twoworlds.tv.HisenseTvAPIBase;
+import com.mediatek.twoworlds.tv.MtkTvConfig;
+import com.mediatek.twoworlds.tv.common.MtkTvConfigTypeBase;
+import com.mediatek.twoworlds.tv.common.MtkTvConfigType;
+import java.io.IOException;
+
 
 import java.lang.reflect.Method;
 
@@ -33,43 +37,22 @@ public class DataGetter {
      */
     public String retrieveSerialNumber() {
 
-        /**
         String serial = "";
 
-        if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-            Log.d(TAG, "permission denied");
-            ActivityCompat.requestPermissions((Activity) context, new String[] {Manifest.permission.READ_PHONE_STATE} ,1);
-            Log.d(TAG, "permission requested");
+        HisenseTvAPI mHisenseTvAPI = HisenseTvAPI.getInstance(context);
+        if (mHisenseTvAPI != null) {
+            try {
+                serial = mHisenseTvAPI.getSerialNewNumber(MtkTvConfigType.CFG_FACTORY_FAC_SERIAL_NEW_NUMBER);
+                Log.d(TAG, "serial number got: " + serial);
+            } catch (Exception e) {
+                serial = "Serial number";
+                Log.e(TAG, "cannot get serial number");
+            }
+        } else {
+            Log.d(TAG, "HisenseTvAPI is null, cannot get serial number");
         }
 
-        if (android.os.Build.VERSION.SDK_INT >= 26) {
-            serial = android.os.Build.getSerial();
-        } else if (android.os.Build.VERSION.SDK_INT <= 25) {
-            serial = android.os.Build.SERIAL;
-        }
-
-        Log.d(TAG, "serial number got: " + serial);
         return serial;
-
-         */
-
-        String model;
-
-        try {
-            Class<?> c = Class.forName("android.os.SystemProperties");
-            Method get = c.getMethod("get", String.class);
-
-            // (?) Lenovo Tab (https://stackoverflow.com/a/34819027/1276306)
-            model = (String) get.invoke(c, "ro.product.hisense.model");
-
-            if (model.equals(""))
-                model = null;
-        } catch (Exception e) {
-            e.printStackTrace();
-            model = null;
-        }
-
-        return model;
     }
 
     /**
