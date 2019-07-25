@@ -17,10 +17,12 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.webkit.ValueCallback;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.hisense.productregistration.R;
@@ -76,6 +78,54 @@ public class MainActivity extends Activity {
                     });
                 } else {
                     view.loadUrl(js);
+                }
+            }
+        });
+
+        //UI Code
+        Button yes = (Button) findViewById(R.id.yes);
+        Button no = (Button) findViewById(R.id.no);
+
+        yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, FirstName.class));
+            }
+        });
+
+        no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Implement code to exit the app
+                finishAffinity();
+                System.exit(0);
+            }
+        });
+
+        yes.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                Button button= v.findViewById(R.id.yes);
+                if(hasFocus){
+                    button.setTextColor(ContextCompat.getColor(getApplication(), R.color.my_text_selected));
+                    button.setBackgroundColor(ContextCompat.getColor(getApplication(),R.color.my_button_selected));
+                } else {
+                    button.setTextColor(ContextCompat.getColor(getApplication(), R.color.my_text_default));
+                    button.setBackgroundColor(ContextCompat.getColor(getApplication(),R.color.my_background_dark));
+                }
+            }
+        });
+
+        no.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                Button button= v.findViewById(R.id.no);
+                if(hasFocus){
+                    button.setTextColor(ContextCompat.getColor(getApplication(), R.color.my_text_selected));
+                    button.setBackgroundColor(ContextCompat.getColor(getApplication(),R.color.my_button_selected));
+                } else {
+                    button.setTextColor(ContextCompat.getColor(getApplication(), R.color.my_text_default));
+                    button.setBackgroundColor(ContextCompat.getColor(getApplication(),R.color.my_background_dark));
                 }
             }
         });
