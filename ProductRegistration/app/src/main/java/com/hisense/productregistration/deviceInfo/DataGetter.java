@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
+
 import com.mediatek.twoworlds.tv.HisenseTvAPI;
 import com.mediatek.twoworlds.tv.HisenseTvAPIBase;
 import com.mediatek.twoworlds.tv.MtkTvConfig;
@@ -37,7 +38,7 @@ public class DataGetter {
      */
     public String retrieveSerialNumber() {
 
-        String serial = "";
+        String serial = "serialNumber";
 
         HisenseTvAPI mHisenseTvAPI = HisenseTvAPI.getInstance(context);
         if (mHisenseTvAPI != null) {
@@ -45,7 +46,7 @@ public class DataGetter {
                 serial = mHisenseTvAPI.getSerialNewNumber(MtkTvConfigType.CFG_FACTORY_FAC_SERIAL_NEW_NUMBER);
                 Log.d(TAG, "serial number got: " + serial);
             } catch (Exception e) {
-                serial = "Serial number";
+                serial = "SerialNumber";
                 Log.e(TAG, "cannot get serial number");
             }
         } else {

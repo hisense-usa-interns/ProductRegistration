@@ -57,6 +57,8 @@ public class MainActivity extends Activity {
         Account account = accountGetter.retrieveAccount();
         String email = accountGetter.retrieveEmail(account);
 
+        gvm.setEmail(email);
+
         //UI Code
         Button yes = (Button) findViewById(R.id.yes);
         Button no = (Button) findViewById(R.id.no);

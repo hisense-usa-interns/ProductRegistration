@@ -26,7 +26,7 @@ public class ZipCode extends Activity {
             @Override
             public void onClick(View v) {
                 EditText editZipCode = findViewById(R.id.zipcode);
-                String zipCode = editZipCode.getText().toString();
+                String zipCode = editZipCode.getText().toString().trim();
                 final GlobalVarManager gvm = (GlobalVarManager) getApplicationContext();
                 gvm.setZip(zipCode);
                 startActivity(new Intent(ZipCode.this, EmailId.class));

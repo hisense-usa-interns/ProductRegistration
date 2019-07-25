@@ -27,7 +27,7 @@ public class FirstName extends Activity {
             @Override
             public void onClick(View v) {
                 EditText editFirstName = findViewById(R.id.fname);
-                String firstName = editFirstName.getText().toString();
+                String firstName = editFirstName.getText().toString().trim();
                 final GlobalVarManager gvm = (GlobalVarManager) getApplicationContext();
                 gvm.setFirstName(firstName);
                 startActivity(new Intent(FirstName.this, LastName.class));

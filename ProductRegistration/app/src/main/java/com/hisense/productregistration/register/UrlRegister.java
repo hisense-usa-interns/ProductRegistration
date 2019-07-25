@@ -38,7 +38,7 @@ public class UrlRegister {
      * @throws MalformedURLException
      * @throws IOException
      */
-    public boolean getRequestToURL(String productType, String model, String serial, String first, String last, String zip, String email) throws MalformedURLException, IOException {
+    public int getRequestToURL(String productType, String model, String serial, String first, String last, String zip, String email) throws MalformedURLException, IOException {
         String url = "https://hisense.stagingtank.com/api/v1/register?ProductType=" + productType + "&ModelNumber=" + model + "&SerialNumber=" + serial + "&FirstName=" + first + "&LastName=" + last + "&PostalZipCode=" + zip + "&Email=" + email;
 
         URL urlObj = new URL(url);
@@ -70,10 +70,20 @@ public class UrlRegister {
 
         System.out.println(response.toString());
 
-        if (responseCode == 200) {
-            return true;
+        if (response.toString().contains("Successfully registered product")) {
+            return 1;
+        } else if (response.toString().contains("FirstName cannot be blank")) {
+            return 2;
+        } else if (response.toString().contains("LastName cannot be blank")) {
+            return 3;
+        } else if (response.toString().contains("PostalZipCode cannot be blank")) {
+            return 4;
+        } else if (response.toString().contains("Email cannot be blank")) {
+            return 5;
+        } else if (response.toString().contains("Email has to be a valid format")){
+            return 6;
         } else {
-            return false;
+            return 7;
         }
     }
 
