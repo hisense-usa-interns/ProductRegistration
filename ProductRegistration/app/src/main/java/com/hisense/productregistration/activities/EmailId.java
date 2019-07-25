@@ -7,8 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.hisense.productregistration.R;
+import com.hisense.productregistration.deviceInfo.GlobalVarManager;
+import com.hisense.productregistration.register.UrlRegister;
 
 public class EmailId extends Activity {
 
@@ -24,7 +27,29 @@ public class EmailId extends Activity {
         proceedEmailId.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(EmailId.this, SuccessPage.class));
+                EditText editEmailId = findViewById(R.id.email);
+                String emailId = editEmailId.getText().toString();
+                final GlobalVarManager gvm = (GlobalVarManager) getApplicationContext();
+                gvm.setEmail(emailId);
+
+                final UrlRegister r1 = new UrlRegister(getBaseContext());
+                Thread thread = new Thread(new Runnable() {
+                    public void run() {
+                        try {
+                            boolean registerSuccess = r1.getRequestToURL("televisions",gvm.getModel(),gvm.getSerial(),gvm.getFirstName(),gvm.getLastName(),gvm.getZip(),gvm.getEmail());
+                            if (registerSuccess) {
+                                startActivity(new Intent(EmailId.this, SuccessPage.class));
+                            } else {
+                                System.out.println("Register failed");
+                            }
+                        } catch (Exception e) {
+
+                        }
+                    }
+                });
+                thread.start();
+
+                //startActivity(new Intent(EmailId.this, SuccessPage.class));
             }
         });
 

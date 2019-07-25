@@ -7,9 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hisense.productregistration.R;
+import com.hisense.productregistration.deviceInfo.GlobalVarManager;
 
 public class SuccessPage extends Activity {
 
@@ -17,6 +19,32 @@ public class SuccessPage extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_success_page);
+
+        final GlobalVarManager gvm = (GlobalVarManager) getApplicationContext();
+
+        TextView firstNameText = findViewById(R.id.firstText);
+        String firstInit = firstNameText.getText().toString();
+        firstNameText.setText(firstInit + " " + gvm.getFirstName());
+
+        TextView lastNameText = findViewById(R.id.lastText);
+        String lastInit = lastNameText.getText().toString();
+        lastNameText.setText(lastInit + " " + gvm.getLastName());
+
+        TextView modelText = findViewById(R.id.modelText);
+        String modelInit = modelText.getText().toString();
+        modelText.setText(modelInit + " " + gvm.getModel());
+
+        TextView serialText = findViewById(R.id.serialText);
+        String serialInit = serialText.getText().toString();
+        serialText.setText(serialInit + " " + gvm.getSerial());
+
+        TextView emailText = findViewById(R.id.emailText);
+        String emailInit = emailText.getText().toString();
+        emailText.setText(emailInit + " " + gvm.getEmail());
+
+        TextView zipText = findViewById(R.id.zipText);
+        String zipInit = zipText.getText().toString();
+        zipText.setText(zipInit + " " + gvm.getZip());
 
         //UI Code
         Button exit = (Button) findViewById(R.id.exit);

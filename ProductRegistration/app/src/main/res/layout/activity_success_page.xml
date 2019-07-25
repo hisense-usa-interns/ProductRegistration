@@ -26,54 +26,66 @@
             android:text="This is your registration details."
             android:textColor="@color/my_text_subtitle"
             android:textSize="48pt"/>
+
         <TextView
+            android:id="@+id/firstText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="120px"
             android:layout_marginTop="160px"
             android:text="First Name: "
             android:textColor="@color/my_text_default"
-            android:textSize="48pt"/>
+            android:textSize="48pt" />
+
         <TextView
+            android:id="@+id/lastText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="120px"
             android:layout_marginTop="36px"
             android:text="Last Name: "
             android:textColor="@color/my_text_default"
-            android:textSize="48pt"/>
+            android:textSize="48pt" />
+
         <TextView
+            android:id="@+id/modelText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="120px"
             android:layout_marginTop="36px"
             android:text="Model Number: "
             android:textColor="@color/my_text_default"
-            android:textSize="48pt"/>
+            android:textSize="48pt" />
+
         <TextView
+            android:id="@+id/serialText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="120px"
             android:layout_marginTop="36px"
             android:text="Serial Number: "
             android:textColor="@color/my_text_default"
-            android:textSize="48pt"/>
+            android:textSize="48pt" />
+
         <TextView
+            android:id="@+id/emailText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="120px"
             android:layout_marginTop="36px"
             android:text="Email Id: "
             android:textColor="@color/my_text_default"
-            android:textSize="48pt"/>
+            android:textSize="48pt" />
+
         <TextView
+            android:id="@+id/zipText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="120px"
             android:layout_marginTop="36px"
-            android:text="Zip/Postal Code"
+            android:text="Zip/Postal Code:"
             android:textColor="@color/my_text_default"
-            android:textSize="48pt"/>
+            android:textSize="48pt" />
     </LinearLayout>
 
 

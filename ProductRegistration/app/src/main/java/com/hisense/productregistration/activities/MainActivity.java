@@ -2,7 +2,6 @@ package com.hisense.productregistration.activities;
 
 import android.Manifest;
 import android.accounts.Account;
-import android.accounts.AccountAuthenticatorActivity;
 import android.accounts.AccountManager;
 import android.app.Activity;
 import android.content.Context;
@@ -18,16 +17,12 @@ import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.webkit.ValueCallback;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.hisense.productregistration.R;
 import com.hisense.productregistration.deviceInfo.AccountGetter;
 import com.hisense.productregistration.deviceInfo.DataGetter;
+import com.hisense.productregistration.deviceInfo.GlobalVarManager;
 
 import java.io.IOException;
 import java.util.List;
@@ -43,16 +38,14 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        WebView webview = new WebView(this);
-        setContentView(webview);
-        webview.loadUrl("https://www.hisense-usa.com/support/register");
-
-        WebSettings settings = webview.getSettings();
-        settings.setJavaScriptEnabled(true);
-
         DataGetter dataGetter = new DataGetter(context);
         String serial = dataGetter.retrieveSerialNumber();
         String model = dataGetter.retrieveModel();
+
+        final GlobalVarManager gvm = (GlobalVarManager) getApplicationContext();
+        gvm.setSerial(serial);
+        gvm.setModel(model);
+
         String postalCode = retrievePostalCode();
         String productType = "televisions";
 
@@ -63,24 +56,6 @@ public class MainActivity extends Activity {
 
         Account account = accountGetter.retrieveAccount();
         String email = accountGetter.retrieveEmail(account);
-
-        final String js = "javascript:document.getElementById('Form_RegisterProductForm_ModelNumber').value = '" + model + "';document.getElementById('Form_RegisterProductForm_SerialNumber').value='" + serial + "';document.getElementById('Form_RegisterProductForm_ProductCategory').value='" + productType + "';document.getElementById('Form_RegisterProductForm_Email').value='" + email + "';document.getElementById('Form_RegisterProductForm_PostalCode').value='" + postalCode + "';";
-
-        webview.setWebViewClient(new WebViewClient() {
-            public void onPageFinished(WebView view, String url) {
-
-                if (android.os.Build.VERSION.SDK_INT >= 19) {
-                    view.evaluateJavascript(js, new ValueCallback<String>() {
-                        @Override
-                        public void onReceiveValue(String s) {
-
-                        }
-                    });
-                } else {
-                    view.loadUrl(js);
-                }
-            }
-        });
 
         //UI Code
         Button yes = (Button) findViewById(R.id.yes);

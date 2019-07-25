@@ -7,8 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.hisense.productregistration.R;
+import com.hisense.productregistration.deviceInfo.GlobalVarManager;
 
 public class FirstName extends Activity {
 
@@ -24,6 +26,10 @@ public class FirstName extends Activity {
         proceedFirstName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                EditText editFirstName = findViewById(R.id.fname);
+                String firstName = editFirstName.getText().toString();
+                final GlobalVarManager gvm = (GlobalVarManager) getApplicationContext();
+                gvm.setFirstName(firstName);
                 startActivity(new Intent(FirstName.this, LastName.class));
             }
         });

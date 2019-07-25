@@ -3,12 +3,13 @@ package com.hisense.productregistration.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.hisense.productregistration.R;
+import com.hisense.productregistration.deviceInfo.GlobalVarManager;
 
 public class LastName extends Activity {
 
@@ -24,6 +25,10 @@ public class LastName extends Activity {
         proceedLastName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                EditText editLastName = findViewById(R.id.lname);
+                String lastName = editLastName.getText().toString();
+                final GlobalVarManager gvm = (GlobalVarManager) getApplicationContext();
+                gvm.setLastName(lastName);
                 startActivity(new Intent(LastName.this, ZipCode.class));
             }
         });

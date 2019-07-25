@@ -48,8 +48,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/my_text_default"
             android:background="@color/my_background_dark"
-            android:text="Proceed"
-            android:onClick="cancelHandler"/>
+            android:text="Proceed"/>
         <Button
             android:id="@+id/no"
             android:paddingTop="54px"
@@ -59,8 +58,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/my_text_default"
             android:background="@color/my_background_dark"
-            android:text="Return"
-            android:onClick="activeHandler"/>
+            android:text="Return"/>
     </LinearLayout>
 
 </LinearLayout>

@@ -38,7 +38,7 @@ public class UrlRegister {
      * @throws MalformedURLException
      * @throws IOException
      */
-    public void getRequestToURL(String productType, String model, String serial, String first, String last, String zip, String email) throws MalformedURLException, IOException {
+    public boolean getRequestToURL(String productType, String model, String serial, String first, String last, String zip, String email) throws MalformedURLException, IOException {
         String url = "https://hisense.stagingtank.com/api/v1/register?ProductType=" + productType + "&ModelNumber=" + model + "&SerialNumber=" + serial + "&FirstName=" + first + "&LastName=" + last + "&PostalZipCode=" + zip + "&Email=" + email;
 
         URL urlObj = new URL(url);
@@ -69,6 +69,12 @@ public class UrlRegister {
         in.close();
 
         System.out.println(response.toString());
+
+        if (responseCode == 200) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 
