@@ -71,4 +71,9 @@ public class SuccessPage extends Activity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed(){
+        Toast.makeText(getApplicationContext(), "Registration completed, please click on \"Exit\"", Toast.LENGTH_LONG).show();
+    }
 }

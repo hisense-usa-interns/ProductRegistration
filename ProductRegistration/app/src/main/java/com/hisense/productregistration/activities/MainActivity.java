@@ -108,6 +108,12 @@ public class MainActivity extends Activity {
         });
     }
 
+    @Override
+    public void onBackPressed(){
+        finishAffinity();
+        System.exit(0);
+    }
+
     /**
      * retrieve the postal code
      * @return postal code of most recent location
