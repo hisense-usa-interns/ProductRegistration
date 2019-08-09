@@ -1,7 +1,5 @@
 package com.hisense.productregistration.deviceInfo;
 
-import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
@@ -11,7 +9,6 @@ import com.mediatek.twoworlds.tv.HisenseTvAPIBase;
 import com.mediatek.twoworlds.tv.MtkTvConfig;
 import com.mediatek.twoworlds.tv.common.MtkTvConfigTypeBase;
 import com.mediatek.twoworlds.tv.common.MtkTvConfigType;
-import java.io.IOException;
 
 
 import java.lang.reflect.Method;

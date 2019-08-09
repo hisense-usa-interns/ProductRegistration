@@ -33,7 +33,7 @@
             android:background="@color/my_background_light"
             android:textSize="64pt"
             android:imeOptions="actionGo"
-            android:inputType="text"/>
+            android:inputType="number|phone"/>
     </LinearLayout>
 
 
